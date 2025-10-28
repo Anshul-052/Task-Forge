@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="C:\web dev\htdocs\4th assignment.css">
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Style the button inside the modal */
+        .modal-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">
+        <marquee>VIT VICULP</marquee>
+         <br>
+             <i>VICulP - An option to monotony</i>
+         </h1>
+         <video class="video-background" autoplay loop muted>
+            <source src="C:\web dev\htdocs\Curtain Opening Sequence.mp4" type="video/mp4">
+        </video>
+    <h2 class="text">Glimpse of us</h2>
+    <img src="c:\Users\VICTUS\Pictures\Screenshots\Screenshot 2024-11-15 170348.png" class="a">
+    <img src="c:\Users\VICTUS\Pictures\Screenshots\Screenshot 2024-11-15 170509.png" class="b">
+    <img src="c:\Users\VICTUS\Pictures\Screenshots\Screenshot 2024-11-15 170108.png" class="c">
+    <img src="c:\Users\VICTUS\Pictures\Screenshots\Screenshot 2024-11-15 170149.png" class="d">
+    <img src="c:\Users\VICTUS\Documents\WhatsApp Image 2024-10-13 at 19.52.53_d2b43fdc.jpg" class="e">
+    
+    <!-- Section to display success stories -->
+    <div id="storyContainer">
+        <!-- Success stories will be dynamically inserted here -->
+    </div>
+
+    <div>
+        <button type="button" class="button" onclick="acceptstories()">Add success story</button> 
+        <button type="button" class="button2" onclick="sendSuccessStories()">Send success stories</button>
+    </div>
+
+    <div class="links">
+        <a href="C:\web dev\css\index.html">Home</a><br>
+        <a href="C:\web dev\css\index2.html">Recruitment Form</a><br>
+        <a href="C:\web dev\css\index3.html">Contact us</a><br>
+        <a href="C:\web dev\css\index5.html">About us</a>
+    </div>
+
+    <!-- The Modal -->
+    <div id="successModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Success!</h2>
+            <p>The success stories have been sent.</p>
+            <button class="modal-button" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Script to handle success story operations -->
+    <script>
+        // Initialize the success stories list from localStorage or an empty array
+        let successStories = JSON.parse(localStorage.getItem('successStories')) || [];
+
+        // Function to add a new success story
+        function acceptstories() {
+            // Prompt the user to enter a new success story
+            let newStory = prompt("Enter the success story:");
+            if (newStory && newStory.trim() !== "") {
+                // Add the new story to the list
+                successStories.push(newStory);
+                // Save the updated list to localStorage
+                localStorage.setItem('successStories', JSON.stringify(successStories));
+                // Display the new list of success stories
+                displayStories();
+            }
+        }
+
+        // Function to display all success stories on the page
+        function displayStories() {
+            const storyContainer = document.getElementById("storyContainer");
+            storyContainer.innerHTML = ''; // Clear previous stories
+
+            successStories.forEach((story, index) => {
+                const storyElement = document.createElement("p");
+                storyElement.textContent = `${index + 1}. ${story}`;
+                storyContainer.appendChild(storyElement);
+            });
+        }
+
+        // Function to send success stories and show a popup message
+        function sendSuccessStories() {
+            if (successStories.length === 0) {
+                alert("There are no success stories to send.");
+                return;
+            }
+
+            // Simulate sending the stories
+            // Show the modal
+            showModal();
+        }
+
+        // Function to display the modal
+        function showModal() {
+            const modal = document.getElementById("successModal");
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+
+        // Initial call to display stored success stories
+        displayStories();
+    </script>
+</body>
+</html>
